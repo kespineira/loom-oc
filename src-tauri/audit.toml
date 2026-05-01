@@ -1,0 +1,24 @@
+# cargo-audit configuration.
+#
+# This file documents which advisories we have evaluated and chosen to suppress
+# locally, with rationale. Dependabot alerts on GitHub need to be dismissed
+# manually in the UI with the same reasoning.
+
+[advisories]
+ignore = [
+  # RUSTSEC-2024-0429 — Unsoundness in glib::VariantStrIter (glib < 0.20.0).
+  #
+  # Source of dependency: tauri 2.11.0 → muda/tao/tauri-runtime-wry → gtk 0.18
+  # → glib 0.18.5. This is the latest tauri 2 release; tauri 2 still uses the
+  # GTK3 (gtk-rs 0.18) bindings on Linux. The 0.18.x line of glib has no
+  # backport of the soundness fix (patched only in glib >= 0.20).
+  #
+  # We do not call any of the affected functions (VariantStrIter::{next,
+  # next_back, last, nth, nth_back}) — verified by grepping the codebase for
+  # `glib::` and `VariantStrIter`. The unsound code path is therefore not
+  # reachable from Loom.
+  #
+  # Action: re-evaluate when tauri 2 upgrades to gtk-rs 0.20 (likely in a
+  # future minor release) or when Loom migrates to tauri 3.
+  "RUSTSEC-2024-0429",
+]
