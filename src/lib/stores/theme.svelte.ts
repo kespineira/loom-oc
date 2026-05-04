@@ -12,14 +12,15 @@ function detectInitial(): Theme {
 }
 
 function createTheme() {
-  let value = $state<Theme>(detectInitial());
+  const initial = detectInitial();
+  let value = $state<Theme>(initial);
 
   function apply(next: Theme) {
     if (!browser) return;
     document.documentElement.dataset.theme = next;
   }
 
-  if (browser) apply(value);
+  if (browser) apply(initial);
 
   return {
     get value() {

@@ -10,6 +10,7 @@
     placeholder?: string;
     invalid?: boolean;
     disabled?: boolean;
+    onValueChange?: (value: number | null) => void;
   };
 
   let {
@@ -21,6 +22,7 @@
     placeholder,
     invalid = false,
     disabled = false,
+    onValueChange,
   }: Props = $props();
 
   function clamp(n: number): number {
@@ -32,6 +34,11 @@
   function bump(direction: 1 | -1) {
     const current = value ?? 0;
     value = clamp(current + step * direction);
+    onValueChange?.(value);
+  }
+
+  function handleInput() {
+    onValueChange?.(value);
   }
 </script>
 
@@ -45,6 +52,7 @@
     {placeholder}
     {disabled}
     bind:value
+    oninput={handleInput}
     aria-invalid={invalid || undefined}
     class="num__input"
   />

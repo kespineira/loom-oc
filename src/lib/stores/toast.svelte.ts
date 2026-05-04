@@ -34,7 +34,15 @@ function createToasts() {
       description: input.description,
       duration: input.duration ?? DEFAULT_DURATION_MS,
     };
-    items = [...items, toast].slice(-MAX_VISIBLE);
+    const nextItems = [...items, toast].slice(-MAX_VISIBLE);
+    for (const item of items) {
+      if (!nextItems.some((next) => next.id === item.id)) {
+        const timer = timers.get(item.id);
+        if (timer) clearTimeout(timer);
+        timers.delete(item.id);
+      }
+    }
+    items = nextItems;
     if (toast.duration > 0) {
       timers.set(
         id,

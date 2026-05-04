@@ -9,6 +9,7 @@ export { default as NumberInput } from "./NumberInput.svelte";
 export { default as PathInput } from "./PathInput.svelte";
 export { default as PermissionMatrix } from "./PermissionMatrix.svelte";
 export { default as Select } from "./Select.svelte";
+export { default as TabNav } from "./TabNav.svelte";
 export { default as Textarea } from "./Textarea.svelte";
 export { default as TextInput } from "./TextInput.svelte";
 export { default as Toast } from "./Toast.svelte";

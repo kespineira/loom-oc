@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { X, CheckCircle2, AlertTriangle, AlertOctagon, Info } from "lucide-svelte";
+  import { CheckCircle2, AlertTriangle, AlertOctagon, Info } from "lucide-svelte";
   import { toasts, type ToastTone } from "$lib/stores/toast.svelte";
 
   const ICONS: Record<ToastTone, typeof CheckCircle2> = {
@@ -27,7 +27,7 @@
         aria-label="Dismiss"
         onclick={() => toasts.dismiss(toast.id)}
       >
-        <X size={14} />
+        <span>×</span>
       </button>
     </div>
   {/each}
@@ -115,8 +115,8 @@
 
   .toast__close {
     flex-shrink: 0;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     background: transparent;
     border: 0;
     border-radius: var(--radius-sm);
@@ -125,11 +125,18 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    font-size: 14px;
+    line-height: 1;
   }
 
   .toast__close:hover {
     background: var(--bg-3);
     color: var(--text-primary);
+  }
+
+  .toast__close span {
+    font-size: 18px;
+    font-weight: 300;
   }
 
   @keyframes toast-in {

@@ -15,7 +15,9 @@ pub struct ConfigPaths {
 }
 
 pub fn global_config_path() -> Option<PathBuf> {
-    dirs::config_dir().map(|d| d.join(CONFIG_DIR_NAME).join(CONFIG_FILE_NAME))
+    let home = std::env::var("HOME").ok()?;
+    let config_dir = PathBuf::from(home).join(".config").join(CONFIG_DIR_NAME);
+    Some(config_dir.join(CONFIG_FILE_NAME))
 }
 
 pub fn project_config_path(cwd: Option<&PathBuf>) -> Option<PathBuf> {

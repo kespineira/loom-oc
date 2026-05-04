@@ -18,7 +18,7 @@
     <p class="diff__empty">{emptyLabel}</p>
   {:else}
     <pre class="diff__pre"><code
-        >{#each lines as line (`${line.kind}-${line.text}`)}<span
+        >{#each lines as line, i (`${i}-${line.kind}-${line.text}`)}<span
             class="diff__line diff__line--{line.kind}"
             ><span class="diff__prefix"
               >{line.kind === "add" ? "+" : line.kind === "remove" ? "-" : " "}</span

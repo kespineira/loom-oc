@@ -4,6 +4,7 @@
     checked?: boolean;
     disabled?: boolean;
     label?: string;
+    onCheckedChange?: (checked: boolean) => void;
     "aria-label"?: string;
   };
 
@@ -12,11 +13,15 @@
     checked = $bindable(false),
     disabled = false,
     label,
+    onCheckedChange,
     "aria-label": ariaLabel,
   }: Props = $props();
 
   function toggle() {
-    if (!disabled) checked = !checked;
+    if (!disabled) {
+      checked = !checked;
+      onCheckedChange?.(checked);
+    }
   }
 
   function onkeydown(e: KeyboardEvent) {

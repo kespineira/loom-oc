@@ -1,9 +1,10 @@
 <script lang="ts" generics="T extends string | number">
   import { ChevronDown } from "lucide-svelte";
+  import type { HTMLSelectAttributes } from "svelte/elements";
 
   type Option = { value: T; label: string };
 
-  type Props = {
+  type Props = HTMLSelectAttributes & {
     id?: string;
     value?: T | null;
     options: Option[];
@@ -19,16 +20,19 @@
     placeholder = "Select…",
     invalid = false,
     disabled = false,
+    class: className = "",
+    ...rest
   }: Props = $props();
 </script>
 
-<div class="sel" class:is-invalid={invalid} class:is-disabled={disabled}>
+<div class="sel {className}" class:is-invalid={invalid} class:is-disabled={disabled}>
   <select
     {id}
     bind:value
     {disabled}
     aria-invalid={invalid || undefined}
     class="sel__input"
+    {...rest}
   >
     {#if placeholder}
       <option value="" disabled selected={value === null || value === undefined}>
