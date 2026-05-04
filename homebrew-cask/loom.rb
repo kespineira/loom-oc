@@ -1,4 +1,4 @@
-cask "loom" do
+cask "loom-oc" do
   version "0.1.0"
   sha256 "REPLACE_WITH_SHA256_FROM_GITHUB_RELEASE"
 
