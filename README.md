@@ -9,13 +9,14 @@ Download the latest release for macOS or install via Homebrew.
 ### Homebrew
 
 ```sh
-brew install --cask kespineira/loom-oc/loom-oc
+brew tap kespineira/homebrew-tap
+brew install kespineira/homebrew-tap/loom-oc
 ```
 
 ### Installer script
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/kevin-espineira/loom-oc/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/kespineira/loom-oc/main/install.sh | bash
 ```
 
 ### Manual download
@@ -80,7 +81,7 @@ scripts/
 - Rust stable toolchain through `rustup`.
 - Tauri 2 [system dependencies](https://tauri.app/start/prerequisites/).
 
-## Install
+## Setup
 
 ```sh
 pnpm install
