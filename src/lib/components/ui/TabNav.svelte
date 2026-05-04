@@ -7,8 +7,11 @@
 
   const tabs = [
     { id: "settings", label: "Settings" },
+    { id: "agents", label: "Agents" },
     { id: "providers", label: "Providers" },
     { id: "mcp", label: "MCP Servers" },
+    { id: "permissions", label: "Permissions" },
+    { id: "commands", label: "Commands" },
     { id: "plugins", label: "Plugins" },
   ];
 </script>

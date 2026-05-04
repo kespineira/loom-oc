@@ -5,8 +5,8 @@ use std::path::PathBuf;
 
 use serde_json::Value;
 
-use crate::config::{ConfigError, ReadResult};
-use crate::paths::ConfigPaths;
+use crate::config::{ConfigError, ReadResult, WriteResult};
+use crate::paths::{ConfigPaths, ConfigTarget};
 
 #[tauri::command]
 fn config_paths(cwd: Option<PathBuf>) -> ConfigPaths {
@@ -14,13 +14,30 @@ fn config_paths(cwd: Option<PathBuf>) -> ConfigPaths {
 }
 
 #[tauri::command]
-fn read_config(path: PathBuf) -> Result<ReadResult, ConfigError> {
+fn read_config(target: ConfigTarget, cwd: Option<PathBuf>) -> Result<ReadResult, ConfigError> {
+    let path = paths::target_config_path(target, cwd).ok_or(ConfigError::PathResolutionFailed {
+        target: match target {
+            ConfigTarget::Global => "global",
+            ConfigTarget::Project => "project",
+        },
+    })?;
     config::read(path)
 }
 
 #[tauri::command]
-fn write_config(path: PathBuf, value: Value) -> Result<(), ConfigError> {
-    config::write(path, &value)
+fn write_config(
+    target: ConfigTarget,
+    cwd: Option<PathBuf>,
+    value: Value,
+    expected_revision: Option<String>,
+) -> Result<WriteResult, ConfigError> {
+    let path = paths::target_config_path(target, cwd).ok_or(ConfigError::PathResolutionFailed {
+        target: match target {
+            ConfigTarget::Global => "global",
+            ConfigTarget::Project => "project",
+        },
+    })?;
+    config::write(path, &value, expected_revision)
 }
 
 #[tauri::command]
