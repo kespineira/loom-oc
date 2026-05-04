@@ -2,6 +2,26 @@
 
 Visual config editor for [OpenCode](https://opencode.ai). Loom is a small Tauri 2 and SvelteKit desktop app for editing OpenCode JSON configuration without opening `~/.config/opencode/opencode.json` by hand.
 
+## Install
+
+Download the latest release for macOS or install via Homebrew.
+
+### Homebrew
+
+```sh
+brew install --cask kespineira/loom-oc/loom-oc
+```
+
+### Installer script
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/kevin-espineira/loom-oc/main/install.sh | bash
+```
+
+### Manual download
+
+Get the `.dmg` from the [GitHub Releases page](https://github.com/kespineira/loom-oc/releases).
+
 ## Features
 
 - Global and project config scopes with backend-resolved paths.
@@ -11,6 +31,7 @@ Visual config editor for [OpenCode](https://opencode.ai). Loom is a small Tauri 
 - Conflict detection through file revisions so external edits are not overwritten silently.
 - Automatic `.bak` backup before overwriting an existing config file.
 - Light and dark themes with a collapsible sidebar and command palette.
+- Automatic updates via Tauri Updater (checks GitHub Releases on launch).
 
 ## Shortcuts
 
